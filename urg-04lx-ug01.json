@@ -21,9 +21,5 @@
         },
         "Resolution": 0.3515625,
         "ScanFrequency": 10
-    },
-    "InvalidMeasurement": {
-        "Probability": 0.0,
-        "InvalidValue": "Max"
     }
 }

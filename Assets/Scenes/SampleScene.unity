@@ -150,7 +150,7 @@ Transform:
   m_GameObject: {fileID: 3317036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.803, y: 0.329, z: 1.708}
+  m_LocalPosition: {x: 1.526, y: 0.329, z: 1.708}
   m_LocalScale: {x: 0.01, y: 0.3, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -255,7 +255,7 @@ Transform:
   m_GameObject: {fileID: 3739953}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.232, y: 0.329, z: 1.662}
+  m_LocalPosition: {x: -0.953, y: 0.329, z: 1.662}
   m_LocalScale: {x: 0.01, y: 0.3, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -537,7 +537,7 @@ Transform:
   m_GameObject: {fileID: 86337324}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.485, y: -0.5515887, z: -0.077}
+  m_LocalPosition: {x: -0.2, y: -0.5515887, z: 0}
   m_LocalScale: {x: 0.1, y: 0.3, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -568,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 243028773}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.89026475, y: 0.5515887, z: 0.5041528}
+  m_LocalPosition: {x: 0, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -962,7 +962,7 @@ Transform:
   m_GameObject: {fileID: 1398337319}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8132647, y: -0.5515887, z: 0.05484724}
+  m_LocalPosition: {x: 0.2, y: -0.5515887, z: 0}
   m_LocalScale: {x: 0.1, y: 0.2, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1069,7 +1069,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.289, y: 0.329, z: -0.575}
-  m_LocalScale: {x: 0.01, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1979740995}
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a192039de0004798ba7698dd1787286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config_filepath: lidar2d_spec.json
+  config_filepath: urg-04lx-ug01.json
   max_count: 360
   robotName: LiDAR2D
   pduName: scan

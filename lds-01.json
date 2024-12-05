@@ -17,9 +17,5 @@
         "AscendingOrderOfData": false,
         "Resolution": 1,
         "ScanFrequency": 5
-    },
-    "InvalidMeasurement": {
-        "Probability": 0.0,
-        "InvalidValue": "Max"
     }
 }
