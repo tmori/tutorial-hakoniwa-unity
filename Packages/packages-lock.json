@@ -32,7 +32,7 @@
         "com.unity.nuget.newtonsoft-json": "3.0.2",
         "com.hakoniwa-lab.hakoniwa-pdu": "https://github.com/toppers/hakoniwa-pdu-csharp.git"
       },
-      "hash": "e9636f5e8c8a157d88a278658465b31de12c1c7d"
+      "hash": "a3811d6538fcbe0294f8c43af290e7034897248e"
     },
     "com.unity.collab-proxy": {
       "version": "2.6.0",
