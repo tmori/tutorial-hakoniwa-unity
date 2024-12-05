@@ -1205,8 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a192039de0004798ba7698dd1787286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config_filepath: ./lidar2d_spec.json
-  update_cycle: 10
+  config_filepath: lidar2d_spec.json
   max_count: 360
   robotName: LiDAR2D
   pduName: scan

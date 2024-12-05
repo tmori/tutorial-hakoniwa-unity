@@ -85,6 +85,7 @@ namespace hakoniwa.sensors.lidar
     public class LiDAR2DSensorParameters
     {
         public string frame_id { get; set; }
+        public int freq { get; set; }
         public DetectionDistance DetectionDistance { get; set; }
         public DistanceAccuracy DistanceAccuracy { get; set; }
         public AngleRange AngleRange { get; set; }
@@ -112,7 +113,7 @@ namespace hakoniwa.sensors.lidar
     {
         public string config_filepath = "./lidar2d_spec.json";
         private GameObject sensor;
-        public int update_cycle = 10;
+        private int update_cycle = 10;
         public LiDAR2DSensorParameters sensorParameters;
         public int max_count = 360;
         private float[] distances;
