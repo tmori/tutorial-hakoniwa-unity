@@ -9,10 +9,6 @@
         "DistanceIndepedentAccuracy": {
             "StdDev": 0.00505,
             "NoiseDistribution": "Gaussian"
-        },
-        "DistanceDepedentAccuracy": {
-            "Percentage": 3.5,
-            "NoiseDistribution": "Gaussian"
         }
     },
     "AngleRange": {

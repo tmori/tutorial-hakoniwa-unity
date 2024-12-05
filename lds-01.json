@@ -6,10 +6,6 @@
     },
     "DistanceAccuracy": {
         "type": "dependent",
-        "DistanceIndepedentAccuracy": {
-            "StdDev": 0.00505,
-            "NoiseDistribution": "Gaussian"
-        },
         "DistanceDepedentAccuracy": {
             "Percentage": 5.0,
             "NoiseDistribution": "Gaussian"
