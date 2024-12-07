@@ -22,7 +22,7 @@
         "com.unity.nuget.newtonsoft-json": "3.0.2",
         "com.endel.nativewebsocket": "https://github.com/endel/NativeWebSocket.git#upm"
       },
-      "hash": "32b8c45f7af1ba82acc4e6f4886b50f0592d68a3"
+      "hash": "d0337f64e9ff08ccc7a834c7191485278fa3f671"
     },
     "com.hakoniwa-lab.hakoniwa-sim": {
       "version": "https://github.com/toppers/hakoniwa-sim-csharp.git",

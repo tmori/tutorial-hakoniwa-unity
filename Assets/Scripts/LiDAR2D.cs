@@ -160,13 +160,13 @@ namespace hakoniwa.sensors.lidar
 
             var pduManager = hakoPdu.GetPduManager();
 
-            IPdu pdu = pduManager.CreatePdu(robotName, pduName);
+            INamedPdu npdu = pduManager.CreateNamedPdu(robotName, pduName);
 
             this.Scan();
-            this.SetScanData(pdu);
-            string key = pduManager.WritePdu(robotName, pdu);
-            var ret = await pduManager.FlushPdu(robotName, pduName);
-            Debug.Log("Flush result: " + ret);
+            this.SetScanData(npdu.Pdu);
+            pduManager.WriteNamedPdu(npdu);
+            var ret = await pduManager.FlushNamedPdu(npdu);
+            Debug.Log("Flush result: " + ret); 
         }
         private void Scan()
         {
