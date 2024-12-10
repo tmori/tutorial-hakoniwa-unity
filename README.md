@@ -87,6 +87,45 @@ Unity画面上で、以下の操作が可能です。
   - Eキーを押すと、障害物が拡大します。
   - Qキーを押すと、障害物が縮小します。
 
+# 箱庭Unityフレームワークの利用方法
+
+## パッケージのインストールについて
+本リポジトリのmanifest.jsonには、箱庭Unityフレームワークを利用するためのリポジトリが記載されています(hakoniwa-lab.xxxのものです)が含まれているため、特別なインストール作業は不要です。
+
+```json
+{
+  "dependencies": {
+    "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.endel.nativewebsocket": "https://github.com/endel/NativeWebSocket.git#upm",
+    "com.hakoniwa-lab.hakoniwa-pdu": "https://github.com/toppers/hakoniwa-pdu-csharp.git#main",
+    "com.hakoniwa-lab.hakoniwa-sim": "https://github.com/toppers/hakoniwa-sim-csharp.git",
+    :
+  }
+}
+```
+
+また、パッケージマネージャーをひらけば、箱庭Unityフレームワークがインストールされていることを確認できます。
+
+![image](images/HakoniwaPackages.png)
+
+## 利用方法
+
+箱庭Unityフレームワークの利用方法については、以下のリンクを参照してください。
+
+[箱庭Unityフレームワーク](https://github.com/toppers/hakoniwa-sim-csharp)
+
+本リポジトリのプロジェクトでは、以下のファイルが用意されています。
+
+- 箱庭Unityフレームワークを利用しているスクリプト
+  - Assets/Scripts/LiDAR2D.cs
+  - Assets/Scripts/GUI/SimTime.cs
+- 箱庭Unityフレームワークを利用していないスクリプト
+  - Assets/Scripts/GUI/SimStart.cs
+  - Assets/Scripts/GUI/CameraView.cs
+  - Assets/Scripts/GUI/ObjectMove.cs
+
+詳細は、各スクリプトにおいて、`HakoAsset`を呼び出しているコード周辺を参照してください。
+
 # 参考リンク
 
 - [箱庭でLiDARスペックをビジュアライズしてみた](https://qiita.com/kanetugu2018/items/56e9ba90e2d32dad76cb)
