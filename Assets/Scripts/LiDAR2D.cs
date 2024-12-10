@@ -166,7 +166,7 @@ namespace hakoniwa.sensors.lidar
             this.SetScanData(npdu.Pdu);
             pduManager.WriteNamedPdu(npdu);
             var ret = await pduManager.FlushNamedPdu(npdu);
-            Debug.Log("Flush result: " + ret); 
+            //Debug.Log("Flush result: " + ret); 
         }
         private void Scan()
         {

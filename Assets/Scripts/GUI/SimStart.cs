@@ -43,7 +43,7 @@ namespace hakoniwa.gui
             else
             {
                 my_btn.interactable = true;
-                Debug.Log($"Enabled interactable button because of state({state} cmd_status({cmd_status})");
+                //Debug.Log($"Enabled interactable button because of state({state} cmd_status({cmd_status})");
             }
             {
 
