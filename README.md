@@ -73,6 +73,10 @@ Unityエディタの再生ボタンを押すと、シミュレーションが開
 
 ![image](images/simulation.png)
 
+なお、Unityアプリケーションは以下で公開していますので、そちらをご利用いただくことも可能です。
+
+https://github.com/tmori/tutorial-hakoniwa-unity/releases/tag/v1.0.0
+
 # 操作方法
 
 Unity画面上で、以下の操作が可能です。
