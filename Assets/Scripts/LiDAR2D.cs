@@ -130,6 +130,50 @@ namespace hakoniwa.sensors.lidar
         IHakoPdu hakoPdu;
         public string robotName = "LiDAR2D";
         public string pduName = "scan";
+        private LineRenderer lineRenderer;
+
+        private void InitializeLineRenderer()
+        {
+            lineRenderer = this.gameObject.AddComponent<LineRenderer>();
+            lineRenderer.positionCount = max_count;
+            lineRenderer.startWidth = 0.02f;
+            lineRenderer.endWidth = 0.02f;
+            lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
+            lineRenderer.material.color = Color.red;
+        }
+
+        private void UpdateLineRenderer(LaserScan scan_data)
+        {
+            Vector3 sensorPosition = sensor.transform.position;
+            Quaternion sensorRotation = sensor.transform.rotation;
+
+            float angle = scan_data.angle_min; // 初期角度
+            for (int i = 0; i < scan_data.ranges.Length; i++)
+            {
+                float distance = scan_data.ranges[i];
+                // ローカル座標でスキャン点を計算
+                //ROS
+                float ros_x = distance * Mathf.Cos(angle);
+                float ros_y = distance * Mathf.Sin(angle);
+                float unity_x = -ros_y;
+                float unity_z = ros_x;
+                Vector3 localPoint = new Vector3(
+                    unity_x, //-distance * Mathf.Sin(angle), 
+                    0,                         
+                    unity_z //distance * Mathf.Cos(angle)
+                );
+
+                // センサーの回転と位置を考慮したワールド座標
+                Vector3 worldPoint = sensorPosition + sensorRotation * localPoint;
+
+                // LineRendererに設定
+                lineRenderer.SetPosition(i, worldPoint);
+
+                // 次のスキャン角度
+                angle += scan_data.angle_increment;
+            }
+        }
+
 
         public void EventInitialize()
         {
@@ -147,6 +191,7 @@ namespace hakoniwa.sensors.lidar
             {
                 throw new ArgumentException($"Can not declare pdu for write: {robotName} {pduName}");
             }
+            InitializeLineRenderer();
         }
         int count = 0;
         public async void EventTick()
@@ -163,10 +208,11 @@ namespace hakoniwa.sensors.lidar
             INamedPdu npdu = pduManager.CreateNamedPdu(robotName, pduName);
 
             this.Scan();
-            this.SetScanData(npdu.Pdu);
+            var scan_data = this.SetScanData(npdu.Pdu);
             pduManager.WriteNamedPdu(npdu);
             var ret = await pduManager.FlushNamedPdu(npdu);
-            //Debug.Log("Flush result: " + ret); 
+            //Debug.Log("Flush result: " + ret);
+            UpdateLineRenderer(scan_data);
         }
         private void Scan()
         {
@@ -187,7 +233,7 @@ namespace hakoniwa.sensors.lidar
                 i++;
             }
         }
-        public void SetScanData(IPdu pdu)
+        public LaserScan SetScanData(IPdu pdu)
         {
             LaserScan scan = new LaserScan(pdu);
 
@@ -225,6 +271,7 @@ namespace hakoniwa.sensors.lidar
             scan.time_increment = time_increment;
             scan.scan_time = scan_time;
             scan.intensities = intensities;
+            return scan;
         }
         public void EventStart()
         {
