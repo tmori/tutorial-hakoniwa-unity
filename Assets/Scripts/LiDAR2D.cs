@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using hakoniwa.pdu.interfaces;
 using hakoniwa.pdu.msgs.sensor_msgs;
@@ -50,13 +51,6 @@ namespace hakoniwa.sensors.lidar
         public string NoiseDistribution { get; set; }
     }
     [Serializable]
-    public class DistanceAccuracy
-    {
-        public string type { get; set; } //independent, dependent
-        public DistanceDepedentAccuracy DistanceDepedentAccuracy { get; set; }
-        public DistanceIndepedentAccuracy DistanceIndepedentAccuracy { get; set; }
-    }
-    [Serializable]
     public class BlindPaddingRange
     {
         public int Size { get; set; }
@@ -75,21 +69,20 @@ namespace hakoniwa.sensors.lidar
     }
 
     [Serializable]
-    public class InvalidMeasurement
+    public class DistanceAccuracyRange
     {
-        public float Probability { get; set; }
-        public string InvalidValue { get; set; }
+        public DetectionDistance Range { get; set; } // 各範囲のMin, Max
+        public string Type { get; set; } // "independent" または "dependent"
+        public DistanceDepedentAccuracy DistanceDepedentAccuracy { get; set; }
+        public DistanceIndepedentAccuracy DistanceIndepedentAccuracy { get; set; }
     }
-
     [Serializable]
     public class LiDAR2DSensorParameters
     {
         public string frame_id { get; set; }
-        public int freq { get; set; }
         public DetectionDistance DetectionDistance { get; set; }
-        public DistanceAccuracy DistanceAccuracy { get; set; }
+        public List<DistanceAccuracyRange> DistanceAccuracy { get; set; }
         public AngleRange AngleRange { get; set; }
-        public InvalidMeasurement InvalidMeasurement { get; set; }
     }
     public class JsonParser
     {
@@ -340,9 +333,9 @@ namespace hakoniwa.sensors.lidar
             Debug.Log($"scan_time: {scan_time}");
         }
 
-        private float AddNoiseToDistanceDependent(float distance)
+        private float AddNoiseToDistanceDependent(DistanceDepedentAccuracy accuracy, float distance)
         {
-            float accuracyPercentage = sensorParameters.DistanceAccuracy.DistanceDepedentAccuracy.Percentage / 100.0f;
+            float accuracyPercentage = accuracy.Percentage / 100.0f;
             float noiseMean = 0;
             float noiseStandardDeviation = distance * accuracyPercentage;
 
@@ -353,10 +346,10 @@ namespace hakoniwa.sensors.lidar
             // 最大値の上限を考慮
             return Mathf.Min(noisyDistance, this.range_max);
         }
-        private float AddNoiseToDistanceInDependent(float distance)
+        private float AddNoiseToDistanceInDependent(DistanceIndepedentAccuracy accuracy, float distance)
         {
             float noiseMean = 0;
-            float noiseStandardDeviation = sensorParameters.DistanceAccuracy.DistanceIndepedentAccuracy.StdDev;
+            float noiseStandardDeviation = accuracy.StdDev;
 
             // ガウス分布ノイズを生成
             float noise = GenerateGaussianNoise(noiseMean, noiseStandardDeviation);
@@ -376,7 +369,25 @@ namespace hakoniwa.sensors.lidar
             return (float)randNormal;
         }
 
-
+        private float CalculateNoise(float distance)
+        {
+            float ret = distance;
+            float distance_mm = distance * 1000;
+            foreach (var entry in sensorParameters.DistanceAccuracy)
+            {
+                if ((distance_mm >= entry.Range.Min) && (distance_mm < entry.Range.Max)) {
+                    if (entry.Type == "dependent")
+                    {
+                        ret = AddNoiseToDistanceDependent(entry.DistanceDepedentAccuracy, distance);
+                    }
+                    else
+                    {
+                        ret = AddNoiseToDistanceInDependent(entry.DistanceIndepedentAccuracy, distance);
+                    }
+                }
+            }
+            return ret;
+        }
         private float GetSensorValue(float degreeYaw, float degreePitch, bool debug)
         {
             // センサーの基本の前方向を取得
@@ -397,15 +408,7 @@ namespace hakoniwa.sensors.lidar
                 float distance = hit.distance;
 
                 // ノイズを追加
-                if (sensorParameters.DistanceAccuracy.type == "dependent")
-                {
-                    distance = AddNoiseToDistanceDependent(distance);
-                }
-                else
-                {
-                    distance = AddNoiseToDistanceInDependent(distance);
-                }
-
+                distance = CalculateNoise(distance);
                 if (debug)
                 {
                     Debug.DrawRay(sensor.transform.position, finalDirection * distance, Color.red, 0.05f, false);

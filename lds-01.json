@@ -4,13 +4,30 @@
         "Min": 120,
         "Max": 3500
     },
-    "DistanceAccuracy": {
-        "type": "dependent",
-        "DistanceDepedentAccuracy": {
-            "Percentage": 5.0,
-            "NoiseDistribution": "Gaussian"
+    "DistanceAccuracy": [
+        {
+            "Range": {
+                "Min": 120,
+                "Max": 500
+            },
+            "Type": "independent",
+            "DistanceIndepedentAccuracy": {
+                "StdDev": 0.015,
+                "NoiseDistribution": "Gaussian"
+            }
+        },
+        {
+            "Range": {
+                "Min": 500,
+                "Max": 3500
+            },
+            "Type": "dependent",
+            "DistanceDepedentAccuracy": {
+                "Percentage": 5.0,
+                "NoiseDistribution": "Gaussian"
+            }
         }
-    },
+    ],
     "AngleRange": {
         "Min": -180.0,
         "Max": 180.0,
