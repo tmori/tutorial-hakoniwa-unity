@@ -19,10 +19,9 @@
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "3.0.2",
-        "com.endel.nativewebsocket": "https://github.com/endel/NativeWebSocket.git#upm"
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
       },
-      "hash": "d0337f64e9ff08ccc7a834c7191485278fa3f671"
+      "hash": "0d583358fddcf874528aca356ff845aa0c020fb7"
     },
     "com.hakoniwa-lab.hakoniwa-sim": {
       "version": "https://github.com/toppers/hakoniwa-sim-csharp.git",
@@ -32,7 +31,7 @@
         "com.unity.nuget.newtonsoft-json": "3.0.2",
         "com.hakoniwa-lab.hakoniwa-pdu": "https://github.com/toppers/hakoniwa-pdu-csharp.git"
       },
-      "hash": "e645ee28a992319396641747e7c7d23a217a42a1"
+      "hash": "18fac0b603b6f5ab5f04aa3583ea3eb74d66ecdf"
     },
     "com.unity.collab-proxy": {
       "version": "2.6.0",
